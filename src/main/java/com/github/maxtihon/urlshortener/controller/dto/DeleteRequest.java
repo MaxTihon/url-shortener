@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class URLStatsRequest {
+public class DeleteRequest {
     private String shortURL;
 }

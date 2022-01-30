@@ -7,8 +7,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 @RestController
 public class RedirectController {
-    public static final String REDIRECTION_PREFIX = "http://localhost:8080/";
-
     private final ShortenedURLService shortenedURLService;
 
     @Autowired

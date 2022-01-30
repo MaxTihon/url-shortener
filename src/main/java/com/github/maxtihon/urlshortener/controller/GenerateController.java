@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 
 @RestController
 public class GenerateController {
@@ -20,10 +19,10 @@ public class GenerateController {
     }
 
     @PostMapping(path = "/generate", consumes = "application/json")
-    public GenerateResponse generateShortUrl(@RequestBody GenerateRequest generateRequest, HttpServletRequest httpServletRequest) {
+    public GenerateResponse generateShortUrl(@RequestBody GenerateRequest generateRequest) {
         String originalURL = generateRequest.getOriginalURL();
         String token = shortenedURLService.generateShortURL(originalURL);
 
-        return new GenerateResponse(token);
+        return new GenerateResponse(ShortenedURLService.REDIRECTION_PREFIX, token);
     }
 }

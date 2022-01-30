@@ -6,5 +6,6 @@ CREATE TABLE IF NOT EXISTS shortened_url
     token varchar(20) not null unique,
     original_url varchar,
     created_at timestamp,
+    expired_at timestamp,
     redirects bigint
 );

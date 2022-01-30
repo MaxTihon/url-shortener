@@ -23,11 +23,21 @@ public class ShortenedURL {
     private String originalURL;
     @Column(name = "created_at")
     private Date createdAt;
+    @Column(name = "expired_at")
+    private Date expiredAt;
     @Column
     private Long redirects;
 
     @PrePersist
     void createdAt() {
         this.createdAt = new Date();
+    }
+
+    public boolean isExpired(Date currentDate) {
+        if (this.expiredAt == null) {
+            return false;
+        }
+
+        return currentDate.after(this.expiredAt);
     }
 }

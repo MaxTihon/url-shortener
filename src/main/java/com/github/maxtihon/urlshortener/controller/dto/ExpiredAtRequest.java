@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class URLStatsRequest {
+public class ExpiredAtRequest {
     private String shortURL;
+    private int daysToExpired;
 }

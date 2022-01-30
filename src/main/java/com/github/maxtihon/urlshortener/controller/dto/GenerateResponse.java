@@ -1,12 +1,12 @@
 package com.github.maxtihon.urlshortener.controller.dto;
 
+import lombok.Value;
 
-import com.github.maxtihon.urlshortener.controller.RedirectController;
-
+@Value
 public class GenerateResponse {
-    private final String shortURL;
+    String shortURL;
 
-    public GenerateResponse(String token) {
-        this.shortURL = RedirectController.REDIRECTION_PREFIX + token;
+    public GenerateResponse(String prefix, String token) {
+        this.shortURL = prefix + token;
     }
 }
