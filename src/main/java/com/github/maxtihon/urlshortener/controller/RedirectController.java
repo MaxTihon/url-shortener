@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 public class RedirectController {
     private final ShortenedURLService shortenedURLService;
@@ -15,8 +17,9 @@ public class RedirectController {
     }
 
     @GetMapping(path = "/{token}")
-    public RedirectView redirectToOriginalURL(@PathVariable("token") String token) {
+    public RedirectView redirectToOriginalURL(@PathVariable("token") String token, HttpServletRequest httpServletRequest) {
         String originalURL = shortenedURLService.getOriginalURL(token);
+
 
         return new RedirectView(originalURL);
     }

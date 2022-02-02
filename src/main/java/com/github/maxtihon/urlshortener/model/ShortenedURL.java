@@ -17,7 +17,6 @@ public class ShortenedURL {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
     private String token;
     @Column(name = "original_url")
     private String originalURL;
@@ -25,7 +24,6 @@ public class ShortenedURL {
     private Date createdAt;
     @Column(name = "expired_at")
     private Date expiredAt;
-    @Column
     private Long redirects;
 
     @PrePersist
