@@ -25,7 +25,7 @@ public class ShortUrlServiceImpl implements ShortUrlService {
     @Override
     @Transactional
     public ShortUrl generateShortUrl(GenerateRequest generateRequest) {
-        String originalUrl = generateRequest.getOriginalURL();
+        String originalUrl = generateRequest.getOriginalUrl();
         OffsetDateTime expiredAt = generateRequest.getExpiredAt();
 
         ShortUrl shortUrl = generator.generateShortUrl(originalUrl);
@@ -41,12 +41,16 @@ public class ShortUrlServiceImpl implements ShortUrlService {
     public ShortUrl getOriginalUrlForRedirect(String token) {
         ShortUrl shortUrl = repository.findByToken(token);
 
-        if (shortUrl != null && !shortUrl.isExpired()) {
+        if (shortUrl == null) {
+            throw new IllegalStateException("Token not found. Short URL not exist");
+        }
+
+        if (!shortUrl.isExpired()) {
             shortUrl.increaseRedirects();
             repository.save(shortUrl);
             return shortUrl;
         } else {
-            throw new TokenNotFoundException(token);
+            throw new IllegalStateException("The link has expired");
         }
     }
 
@@ -57,7 +61,7 @@ public class ShortUrlServiceImpl implements ShortUrlService {
         if (shortUrl != null) {
             return shortUrl;
         } else {
-            throw new TokenNotFoundException(token);
+            throw new IllegalStateException("Token not found. Short URL not exist");
         }
     }
 

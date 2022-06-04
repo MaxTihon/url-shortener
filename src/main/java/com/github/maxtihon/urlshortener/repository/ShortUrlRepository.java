@@ -7,6 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface ShortUrlRepository extends JpaRepository<ShortUrl, String> {
     ShortUrl findByToken(String token);
-    //ShortUrl createShortUrl(ShortUrl shortUrl);
     void deleteByToken(String token);
 }

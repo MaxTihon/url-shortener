@@ -4,9 +4,9 @@ import lombok.Value;
 
 @Value
 public class GenerateResponse {
-    String shortURL;
+    String shortUrl;
 
     public GenerateResponse(String prefix, String token) {
-        this.shortURL = prefix + token;
+        this.shortUrl = prefix + token;
     }
 }

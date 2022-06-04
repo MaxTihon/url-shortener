@@ -12,11 +12,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 @RestController
 public class ApplicationController {
-    @Value(value = "${redirect.prefix}")
-    private String redirectionPrefix;
     private final ShortUrlService shortUrlService;
 
     @Autowired
@@ -25,9 +25,10 @@ public class ApplicationController {
     }
 
     @PostMapping(path = "/app", consumes = "application/json")
-    public ResponseEntity<GenerateResponse> generateShortUrl(@RequestBody GenerateRequest generateRequest) {
-        String originalURL = generateRequest.getOriginalURL();
+    public ResponseEntity<GenerateResponse> generateShortUrl(@RequestBody GenerateRequest generateRequest, HttpServletRequest request) {
         ShortUrl shortUrl = shortUrlService.generateShortUrl(generateRequest);
+
+        String redirectionPrefix = request.getRequestURL().toString().split("app")[0];
 
         return new ResponseEntity<>(new GenerateResponse(redirectionPrefix, shortUrl.getToken()), HttpStatus.CREATED);
     }
