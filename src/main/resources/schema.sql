@@ -1,11 +1,10 @@
 DROP TABLE IF EXISTS shortened_url;
 
-CREATE TABLE IF NOT EXISTS shortened_url
+CREATE TABLE short_url
 (
-    id SERIAL PRIMARY KEY,
-    token varchar(20) not null unique,
-    original_url varchar,
-    created_at timestamp,
+    token varchar(10) PRIMARY KEY,
+    original_url varchar NOT NULL,
+    created_at timestamp NOT NULL,
     expired_at timestamp,
-    redirects bigint
+    redirects bigint NOT NULL
 );

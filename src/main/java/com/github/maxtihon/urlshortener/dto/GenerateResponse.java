@@ -1,4 +1,4 @@
-package com.github.maxtihon.urlshortener.controller.dto;
+package com.github.maxtihon.urlshortener.dto;
 
 import lombok.Value;
 
